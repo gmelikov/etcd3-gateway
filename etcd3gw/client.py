@@ -42,7 +42,7 @@ _EXCEPTIONS_BY_CODE = {
 class Etcd3Client(object):
     def __init__(self, host='localhost', port=2379, protocol="http",
                  ca_cert=None, cert_key=None, cert_cert=None, timeout=None):
-        """Construct an client to talk to etcd3's grpc-gateway's /v3alpha HTTP API
+        """Construct an client to talk to etcd3's grpc-gateway's /v3 HTTP API
 
         :param host:
         :param port:
@@ -61,7 +61,7 @@ class Etcd3Client(object):
             self.session.cert = (cert_cert, cert_key)
 
     def get_url(self, path):
-        """Construct a full url to the v3alpha API given a specific path
+        """Construct a full url to the v3 API given a specific path
 
         :param path:
         :return: url
@@ -69,7 +69,7 @@ class Etcd3Client(object):
         host = ('[' + self.host + ']' if (self.host.find(':') != -1)
                 else self.host)
         base_url = self.protocol + '://' + host + ':' + str(self.port)
-        return base_url + '/v3alpha/' + path.lstrip("/")
+        return base_url + '/v3/' + path.lstrip("/")
 
     def post(self, *args, **kwargs):
         """helper method for HTTP POST
